@@ -1,0 +1,46 @@
+Dakota version 6.3 released November 15 2015.
+Subversion revision 3842 built Nov  6 2015 22:58:38.
+Running serial Dakota executable in serial mode.
+Start time: Mon Mar 28 17:32:38 2016
+
+------------------------
+Begin DAKOTA input file
+megan_dakota_analysis.in
+------------------------
+# NOT A Dakota parameter study experiment 
+#
+# an attempt to make Dakota work
+# 
+# Call with:
+#   $ dakota -i megan_dakota_analysis.in -o dakota_run.out &> run.log
+
+# There are num_steps + 1 = 7 evaluations.
+
+
+method
+  vector_parameter_study
+    final_point = 5.0
+    num_steps = 6
+
+variables
+  continuous_design = 1
+    descriptors   'deltaT'
+    initial_point  1.0
+
+interface
+  fork
+    analysis_driver = 'ipython C:\Users\Megan\Documents\Megan\School\Colorado\Spring_2016\GEOL5700_Matlab\trydakota\test_driver.py' # must be executable
+    parameters_file = 'params.in'
+    results_file = 'results.out'
+  file_save
+
+responses
+  response_functions = 1
+  no_gradients
+  no_hessians
+
+---------------------
+End DAKOTA input file
+---------------------
+
+Using Dakota input file 'megan_dakota_analysis.in'

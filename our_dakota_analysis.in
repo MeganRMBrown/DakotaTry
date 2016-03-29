@@ -1,0 +1,30 @@
+# NOT A Dakota parameter study experiment with SWASH.
+#
+# an attempt to make Dakota work
+#
+# Call with:
+#   $ dakota -i our_dakota_analysis.in -o dakota_run.out &> run.log
+
+# There are num_steps + 1 = 7 evaluations.
+method
+  vector_parameter_study
+    final_point = 5.0
+    num_steps = 6
+
+variables
+  continuous_design = 1
+    descriptors   'deltaT'
+    initial_point  2.0
+
+interface
+  fork
+    analysis_driver = 'python /Users/gtucker/Dev/TryingDakota/test_driver.py' # must be executable
+    parameters_file = 'params.in'
+    results_file = 'here_are_some_results.out'
+  file_save
+
+responses
+  response_functions = 1
+  no_gradients
+  no_hessians
+
